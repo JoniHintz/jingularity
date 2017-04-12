@@ -21,7 +21,11 @@ public class Menue implements State {
 		fw.getContentPane().addMouseListener(mouse);
 
 	}
-	  
+ 
+        @Override
+        public void enter(State prevState){
+            enter();
+        }	  
 	
 	public Menue(Frame fw) {
             this.fw = fw;

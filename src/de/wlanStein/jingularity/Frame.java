@@ -58,9 +58,8 @@ public class Frame extends JFrame implements Runnable{
     /**
         Returns the current state and enters the previous state found on the stateStack
         Warning: When no state is on the state stack the programm will be terminated.
-        @return the previous state or exit(0)
     */
-    public State popState(){
+    public void popState(){
        State prevState = null;
        if(!stateStack.isEmpty()){
            state.exit();
@@ -71,9 +70,8 @@ public class Frame extends JFrame implements Runnable{
        }
        else{
            state = stateStack.peek();
-           state.enter();
+           state.enter(prevState);
        }
-       return prevState;
     }
     public int getHeight(){
         return h;
@@ -84,16 +82,11 @@ public class Frame extends JFrame implements Runnable{
     }
     /**
         Replaces the state on top of the Statestack
-        @param  the state the programm should enter
-        @return the preuvious state or null if there is no previous state  
     */
-    public State replaceState(State state){
-        State prevState = state;
+    public void replaceState(State state){
         if(state != null)
-            state.exit();
-        this.state = state;
-        state.enter();
-        return state;
+            popState();
+            pushState(state);
     } 
     @Override 
      public void run(){

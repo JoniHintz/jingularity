@@ -39,6 +39,11 @@ public class Game implements State{
 		fw.getContentPane().addMouseListener(mouse);
 	}
 
+        @Override
+        public void enter(State prevState){
+            enter();
+        }
+
 	@Override
 	public void update(double dt) {
         if(b == null || c == null || b2 == null)//When update is called before the state was enterd 
