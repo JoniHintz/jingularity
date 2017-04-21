@@ -8,6 +8,7 @@ public static void main(String[] args){
                       // Breite, Hoehe, Titel, FPS  
      Frame f = new Frame(800, 600, "Game", 60);
      f.pushState(new Menue(f));
+     f.run();
 }
 ...
 
