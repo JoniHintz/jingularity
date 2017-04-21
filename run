@@ -1,0 +1,7 @@
+#!/bin/bash
+javac src/de/wlanStein/jingularity/*.java -classpath bin/ -d bin/
+javac src/de/wlanStein/exampleGame/gameObjects/*.java -classpath bin/ -d bin/
+javac src/de/wlanStein/exampleGame/states/*.java -classpath bin/ -d bin/
+javac src/de/wlanStein/exampleGame/Start.java -classpath bin/ -d bin/
+cd bin
+java de.wlanStein.exampleGame.Start
