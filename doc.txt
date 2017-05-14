@@ -1,0 +1,73 @@
+Quickstart
+The Main Methode
+
+...
+public static void main(String[] args){
+                      // Breite, Hoehe, Titel, FPS  
+     Frame f = new Frame(800, 600, "Game", 60);
+     f.pushState(new Menue(f));
+     f.run();
+}
+...
+
+States
+States are the core component of Jingularity
+The behaviour of the game can be defined in the states.
+Different states mean different behaviour.
+
+States and Frame
+It is recomended to give the frame to the states and to store it as a field. 
+With the frame it is possible to add action listeners and states can be changed.
+You may use a fascade for more encapsulation.
+
+
+StateMethods
+
+public void enter()
+Always ececuted when the state becomes the active state.
+This is the place to add action listeners.
+
+public void enter(State preState)
+like enter but the previous state get passed.
+It is called when a state is poped (see StatePop() in Frame),
+to make it possible to acess information from the otherwise lost state.
+If this is never necessary for a state enter state can simply call eneter()
+
+
+public void update(double dt)
+called in the main loop while the state is active.
+dt is the time since the last update.
+
+public void draw(Graphics g)
+Used to draw graphics on screen. G is a double buffered target that frame draws to the screen. 
+See java.awt.Graphics for more informations.
+
+Blit 
+There are two simple ways to blit the screen.
+The backgroud can be redrawn in every state draw method or the marked condition in the frame draw method can be
+set to true.
+
+public void exit()
+Called when a new state is entered.
+Remove the action listeners here.
+
+Das Frame
+The Frame class combines loop controll and graphics.
+
+Frame methods
+
+public void statePush(State state)
+Push the state to the peak of the state stack, state is now the active state.
+
+public void statePop()
+Pop the state from the state stack. And make the next state the active state.
+If the state stack is empty the application will be terminated.
+
+public void replaceState(State state)
+a combination between pop and push.
+
+other methods
+public int getWidth()
+public int getHeight()
+public void setTitle(String title)
+

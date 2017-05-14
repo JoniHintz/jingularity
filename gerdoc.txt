@@ -1,0 +1,91 @@
+
+Schnellstart Referenz
+
+Die Main Methode
+
+...
+public static void main(String[] args){
+                      // Breite, Hoehe, Titel, FPS  
+     Frame f = new Frame(800, 600, "Game", 60);
+     f.pushState(new Menue(f));
+     f.run();
+}
+...
+
+States
+States sind das Herzstuek von Jingularity 
+in ihnen wird das Verhalten des Spiels definiert,
+unterschiedliche Zustaende heiszt unterschiedliches verhalten.
+
+States und Frame
+Es ist zu empfehlen dem State das Frame als Instanzvariable zu übergeben.
+Ueber diese koennen Actionlistener hinzugefuegt und States gewechselt werden.
+Wer sich mehr Kapselung wuenscht kann hier vielleicht eine Fassade einbauen.
+
+States implementieren folgende Methoden:
+
+public void enter()
+Wird immer ausgefuehrt wenn der State zum Aktiven State wird.
+Hier können Actionlistener hinzugefuegt werden.
+
+public void enter(State preState)
+Wie bei der normalen enter Methode, nur das hier der vorherige 
+State übergeben wird. Ist das fuer einen State in keinen fall nötig kann
+enter(State preState) einfach enter() aufrufen.
+enter(State state) wird von Frame in StatePop() aufgerufen damit es 
+moeglich ist auf Informationen aus dem vorherigen state zuzugreifen.
+
+
+public void update(double dt)
+Wird im main loop solange aufgerufen wie der State aktiv ist.
+dt ist die Zeit die seit dem Letzten Update vergangen ist
+
+public void draw(Graphics g)
+Wird verwendet um Grafik darzustellen. Der Parameter g ist ein Gepuffertes Ziel das vom Frame durch Doppelpufferung auf den Bildschirm gezeichnet wird.
+Sihe java.awt.Graphics für mehr Informationen.
+
+Den Zeichenberreich leeren.
+Eine haeufig genutzter trick in der 2d spiele Entwicklung ist das "Blitten" dabei wird
+der Bildschirm Komplett mit einen Hintergrund übermalt, damit wenn es wenn etwas an einer
+neuen Stelle gezeichnet wird so aussieht als wuerde es sich bewegen. 
+Mit Jingularity kann man diesen Trick auf zwei wegen erreichen.
+Den Hintergrund als eingenstaendiges in der draw Methode zeichnen.
+Oder an der Gekennzeichneten stelle in Frame eine Bedingung auf true setzen.
+
+
+public void exit()
+wird aufgerufen wenn der State verlassen wird.
+/!\ Hier sollten Actionlistener die nicht mehr benoetigt werden Entfernt werden.
+
+Das Frame
+Die Frame klasse vereinigt ablauf Kontrolle und die Umsetzung der Grafik.
+Es stellt folgende Methoden zur verfuegung:
+
+public void statePush(State state)
+Der State wird an die Spitze des StateStacks gesetzt und somit zum aktiven State.
+
+public void statePop()
+Entfernt das Element an der Spitze des StateStacks.  
+Der State der sich jetzt an der Spitze befindet wird zum Aktiven State.
+Ist der State Stack davor oder danach leer wird das Programm beendet.
+
+public void replaceState(State state)
+Ersetzt den State an der Spitze des StateStacks.
+Funktioniert wie eine Kombination aus pop und push.
+
+public void setTitle(String title)
+Setzt den Titel des Fensters.
+
+Weitere Methoden
+public int getWidth()
+public int getHeight()
+
+
+
+
+
+
+
+
+
+
