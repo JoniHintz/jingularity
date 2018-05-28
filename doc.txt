@@ -18,7 +18,6 @@ Different states mean different behaviour.
 States and Frame
 It is recomended to give the frame to the states and to store it as a field. 
 With the frame it is possible to add action listeners and states can be changed.
-You may use a fascade for more encapsulation.
 
 
 StateMethods
@@ -44,8 +43,8 @@ See java.awt.Graphics for more informations.
 
 Blit 
 There are two simple ways to blit the screen.
-The backgroud can be redrawn in every state draw method or the marked condition in the frame draw method can be
-set to true.
+The backgroud can be redrawn in every draw method or the blit flag in the framework can be set 
+by uising setBlit(true)
 
 public void exit()
 Called when a new state is entered.
