@@ -20,7 +20,6 @@ unterschiedliche Zustaende bewirken unterschiedliches verhalten.
 States und Frame
 Es ist zu empfehlen dem State das Frame als Instanzvariable zu übergeben.
 Ueber diese koennen Actionlistener hinzugefuegt und States gewechselt werden.
-Wer sich mehr Kapselung wuenscht kann hier vielleicht eine Fassade einbauen.
 
 States implementieren folgende Methoden:
 
