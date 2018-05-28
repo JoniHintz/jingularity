@@ -15,7 +15,7 @@ public static void main(String[] args){
 States
 States sind das Herzstuek von Jingularity 
 in ihnen wird das Verhalten des Spiels definiert,
-unterschiedliche Zustaende heiszt unterschiedliches verhalten.
+unterschiedliche Zustaende bewirken unterschiedliches verhalten.
 
 States und Frame
 Es ist zu empfehlen dem State das Frame als Instanzvariable zu übergeben.
@@ -50,7 +50,7 @@ der Bildschirm Komplett mit einen Hintergrund übermalt, damit wenn es wenn etwa
 neuen Stelle gezeichnet wird so aussieht als wuerde es sich bewegen. 
 Mit Jingularity kann man diesen Trick auf zwei wegen erreichen.
 Den Hintergrund als eingenstaendiges in der draw Methode zeichnen.
-Oder an der Gekennzeichneten stelle in Frame eine Bedingung auf true setzen.
+Oder die blit instanzvariable im Framework mit setBlit(true) setzen.
 
 
 public void exit()
