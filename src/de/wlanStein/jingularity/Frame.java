@@ -8,6 +8,7 @@ import java.util.Stack;
 public class Frame extends JFrame implements Runnable{
     private Stack<State> stateStack;//Used when it is necessary to remember inactive states
     private State state;
+    private boolean blit = false;
     private final int w;
     private final int h;
     private final int fps;
@@ -104,7 +105,7 @@ public class Frame extends JFrame implements Runnable{
      }
      @Override
      public void paint(Graphics g){
-         if(dbImage == null){//Set this true for autoclear
+         if(blit || dbImage == null){
              dbImage = createImage(w, h);
              dbGraphics = dbImage.getGraphics();
          }
@@ -117,6 +118,9 @@ public class Frame extends JFrame implements Runnable{
          if(state != null)
              state.draw(g);
          repaint();
+     }
+     public void setBlit(boolean blit){
+         this.blit = blit;
      }
 }
      
