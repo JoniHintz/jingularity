@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import de.wlanStein.exampleGame.states.Game;
-import de.wlanStein.jingularity.State;
+import de.wlanStein.jingularity.Strategy;
 import de.wlanStein.jingularity.Frame;
 
-public class Menue implements State {
+public class Menue implements Strategy {
 	private Frame fw;
 	private  MouseAdapter mouse;
 	@Override
@@ -15,7 +15,7 @@ public class Menue implements State {
 		mouse = new MouseAdapter() {
 			@Override 
 			public void mousePressed(MouseEvent e){
-				 fw.pushState(new Game(fw));
+				 fw.pushStrategy(new Game(fw));
 			}
 		};
 		fw.getContentPane().addMouseListener(mouse);
@@ -23,7 +23,7 @@ public class Menue implements State {
 	}
  
         @Override
-        public void enter(State prevState){
+        public void enter(Strategy prevStrategy){
             enter();
         }	  
 	
