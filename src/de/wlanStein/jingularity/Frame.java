@@ -46,7 +46,7 @@ public class Frame extends JFrame implements Runnable{
     }
     /** 
        pushes the strategy to the strategy stack
-       @param the strategu the programm should follow
+       @param the strategy the programm should follow
     */ 
     public void pushStrategy(Strategy strategy){
         if(this.strategy != null)
@@ -57,8 +57,8 @@ public class Frame extends JFrame implements Runnable{
         this.strategy.enter();
     }
     /**
-        Returns the current strategy and enters the previous state found on the stateStack
-        Warning: When no state is on the state stack the programm will be terminated.
+        Returns the current strategy and enters the previous strategy found on the strategyStack
+        Warning: When no strategy is on the strategyStack the programm will be terminated.
         
     */
    public void popStrategy(){
@@ -90,7 +90,7 @@ public class Frame extends JFrame implements Runnable{
         return w;
     }
     /**
-        Replaces the strategy on top of the Strategystack
+        Replaces the strategy on top of the StrategyStack
     */
     public void replaceStrategy(Strategy strategy){
         if(strategy != null)
