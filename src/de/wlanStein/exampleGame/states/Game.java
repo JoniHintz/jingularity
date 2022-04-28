@@ -7,9 +7,9 @@ import java.awt.event.MouseEvent;
 import de.wlanStein.exampleGame.gameObjects.Box;
 import de.wlanStein.exampleGame.gameObjects.Bird;
 import de.wlanStein.exampleGame.states.Menue;
-import de.wlanStein.jingularity.State;
+import de.wlanStein.jingularity.Strategy;
 import de.wlanStein.jingularity.Frame;
-public class Game implements State{
+public class Game implements Strategy{
     private double passedTime = 0.0;
     private Box b;
     private Box b2;
@@ -40,17 +40,17 @@ public class Game implements State{
 	}
 
         @Override
-        public void enter(State prevState){
+        public void enter(Strategy prevStrategy){
             enter();
         }
 
 	@Override
 	public void update(double dt) {
-        if(b == null || c == null || b2 == null)//When update is called before the state was enterd 
+        if(b == null || c == null || b2 == null)//When update is called before the strategy was initialized 
             enter();
         
 	if(gameOver)
-            fw.popState();
+            fw.popStrategy();
         int cPrevious = (int) c.y; 
 	b.update(dt);
 	c.update(dt);
