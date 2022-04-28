@@ -1,6 +1,6 @@
 package de.wlanStein.jingularity;
 import java.awt.Graphics;
-public interface State{
+public interface Strategy{
     public void enter();
     public void enter(State prestate);
     public void update(double dt);
