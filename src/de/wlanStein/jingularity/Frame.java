@@ -6,8 +6,8 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import java.util.Stack;
 public class Frame extends JFrame implements Runnable{
-    private Stack<State> stateStack;//Used when it is necessary to remember inactive states
-    private State state;
+    private Stack<Strategy> strategyStack;
+    private Strategy strategy;
     private boolean blit = false;
     private final int w;
     private final int h;
@@ -15,7 +15,7 @@ public class Frame extends JFrame implements Runnable{
     private Image dbImage;
     private Graphics dbGraphics; 
     public Frame( String title, int w, int h, int fps){
-        stateStack     = new Stack<State>();
+        strategyStack     = new Stack<Strategy>();
         this.w         = w;
         this.h         = h;
         this.fps       = fps;
@@ -26,7 +26,7 @@ public class Frame extends JFrame implements Runnable{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-    //calculates delta time and calls the update method of the State.
+    //calculates delta time and calls the update method of the strategy
     //returns the time when the previous update was entered 
     private double update(double lastTime){
         double minTime = (1e9/fps);
@@ -35,8 +35,8 @@ public class Frame extends JFrame implements Runnable{
         double currentTime = now - lastTime;
         double dt = currentTime/minTime;
         lastTime = now;
-        if(state != null)
-            state.update(dt);
+        if(strategy != null)
+            strategy.update(dt);
         //wait when the programm runs too fast
         double sleepTime = (lastTime +minTime-System.nanoTime())/1e6;
         try{
@@ -45,37 +45,38 @@ public class Frame extends JFrame implements Runnable{
         return lastTime;
     }
     /** 
-       pushes the state to the state stack
-       @param the state the programm should enter
+       pushes the strategy to the strategy stack
+       @param the strategu the programm should follow
     */ 
-    public void pushState(State state){
-        if(this.state != null)
-            this.state.exit();
-        //state is automaticly pushed to the stateStack
-        this.state = state;
-        stateStack.push(state);
-        this.state.enter();
+    public void pushStrategy(Strategy strategy){
+        if(this.strategy != null)
+            this.strategy.exit();
+        //strategy is pushed to the strategyStack
+        this.strategy = strategy;
+        strategyStack.push(strategy);
+        this.strategy.enter();
     }
     /**
-        Returns the current state and enters the previous state found on the stateStack
+        Returns the current strategy and enters the previous state found on the stateStack
         Warning: When no state is on the state stack the programm will be terminated.
+        
     */
-   public void popState(){
+   public void popStrategy(){
        safePop(true);
    }
  
     private void safePop(boolean exitOnClear){
-       State prevState = null;
-       if(!stateStack.isEmpty()){
-           state.exit();
-           prevState = stateStack.pop();
+       Strategy prevStrategy = null;
+       if(!strategyStack.isEmpty()){
+           strategy.exit();
+           prevStrategy = strategyStack.pop();
        }
-       if(exitOnClear && stateStack.isEmpty()){
+       if(exitOnClear && strategyStack.isEmpty()){
            System.exit(0); 
        }
        else{
-           state = stateStack.peek();
-           state.enter(prevState);
+           strategy = strategyStack.peek();
+           strategy.enter(prevStrategy);
        }
     }
    
@@ -89,12 +90,12 @@ public class Frame extends JFrame implements Runnable{
         return w;
     }
     /**
-        Replaces the state on top of the Statestack
+        Replaces the strategy on top of the Strategystack
     */
-    public void replaceState(State state){
-        if(state != null)
+    public void replaceStrategy(Strategy strategy){
+        if(strategy != null)
             safePop(false);
-            pushState(state);
+            pushStrategy(strategy);
     } 
     @Override 
      public void run(){
@@ -115,8 +116,8 @@ public class Frame extends JFrame implements Runnable{
  
      @Override 
      public synchronized void update(Graphics g){
-         if(state != null)
-             state.draw(g);
+         if(strategy != null)
+             strategy.draw(g);
          repaint();
      }
      public void setBlit(boolean blit){
