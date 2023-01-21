@@ -12,25 +12,25 @@ public static void main(String[] args){
 
 States
 States are the core component of Jingularity
-The behaviour of the game can be defined in the states.
-Different states mean different behaviour.
+The behavior of the game can be defined in the states.
+Different states mean different behavior.
 
 States and Frame
-It is recomended to give the frame to the states and to store it as a field. 
+It is recommended to give the frame to the states and to store it as a field. 
 With the frame it is possible to add action listeners and states can be changed.
 
 
 StateMethods
 
 public void enter()
-Always ececuted when the state becomes the active state.
+Always executed when the state becomes the active state.
 This is the place to add action listeners.
 
 public void enter(State preState)
 like enter but the previous state get passed.
-It is called when a state is poped (see StatePop() in Frame),
-to make it possible to acess information from the otherwise lost state.
-If this is never necessary for a state enter state can simply call eneter()
+It is called when a state is popped (see StatePop() in Frame),
+to make it possible to access information from the otherwise lost state.
+Enter can be called without parameter.
 
 
 public void update(double dt)
@@ -43,15 +43,15 @@ See java.awt.Graphics for more informations.
 
 Blit 
 There are two simple ways to blit the screen.
-The backgroud can be redrawn in every draw method or the blit flag in the framework can be set 
-by uising setBlit(true)
+The background can be redrawn in every draw method or the blit flag in the framework can be set 
+by using setBlit(true)
 
 public void exit()
 Called when a new state is entered.
 Remove the action listeners here.
 
-Das Frame
-The Frame class combines loop controll and graphics.
+The Frame
+The Frame class combines loop control and graphics.
 
 Frame methods
 
@@ -63,10 +63,9 @@ Pop the state from the state stack. And make the next state the active state.
 If the state stack is empty the application will be terminated.
 
 public void replaceState(State state)
-a combination between pop and push.
+a combination of pop and push.
 
-other methods
+Other methods
 public int getWidth()
 public int getHeight()
 public void setTitle(String title)
-
